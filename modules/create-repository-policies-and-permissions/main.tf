@@ -8,19 +8,19 @@ terraform {
 }
 
 
-# Get project info
+## Get project info
 data "azuredevops_project" "project" {
   name = var.project_name
 }
 
-# Get shared repository
+## Get shared repository
 data "azuredevops_git_repository" "shared-repository" {
   project_id = data.azuredevops_project.project.id
   name       = "shared"
 }
 
 
-# Create Git Repository
+## Create Git Repository
 resource "azuredevops_git_repository" "repository" {
   project_id = data.azuredevops_project.project.id
   name       =  var.repository_name
@@ -28,6 +28,15 @@ resource "azuredevops_git_repository" "repository" {
     init_type = "Clean"
   }
 }
+
+## Add permissions to git repository
+resource "azuredevops_git_permissions" "project-git-repository-perm" {
+  project_id  = data.azuredevops_project.project.id
+  principal   = var.group_id
+  repository_id = azuredevops_git_repository.repository.id 
+  permissions = var.git_permissions
+}
+
 
 ## Start Branch permission block
 resource "azuredevops_branch_policy_min_reviewers" "policy-min-reviewers" {

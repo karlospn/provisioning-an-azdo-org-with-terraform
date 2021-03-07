@@ -7,28 +7,20 @@ terraform {
   }
 }
 
-# Get project info
+## Get project info
 data "azuredevops_project" "project" {
   name = var.project_name
 }
 
-# Add project permissions to group
+## Add project permissions to group
 resource "azuredevops_project_permissions" "project-perm" {
   project_id  = data.azuredevops_project.project.id
   principal   = var.group_id
   permissions = var.project_permissions
 }
 
-# Add repository permissions to group
-resource "azuredevops_git_permissions" "project-git-repository-perm" {
-  project_id  = data.azuredevops_project.project.id
-  principal   = var.group_id
-  repository_id = var.repository_id
-  permissions = var.git_permissions
-}
-
-#Add pipelines permissions to group
-#Build a powershell script with the following steps:
+## Add pipelines permissions to group
+## TODO: Build a powershell script with the following steps:
 #  - Get an access token using pat and basic auth
 #  - Get all groups from Azure DevOps
 #  - Find group by name
