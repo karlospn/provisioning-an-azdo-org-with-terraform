@@ -32,7 +32,7 @@ resource "azuredevops_branch_policy_min_reviewers" "policy-min-reviewers" {
   blocking = true
 
   settings {
-    reviewer_count     = 2
+    reviewer_count     = 1
     submitter_can_vote = false
     last_pusher_cannot_approve = true
     allow_completion_with_rejects_or_waits = false
