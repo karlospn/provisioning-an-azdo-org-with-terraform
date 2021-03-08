@@ -23,11 +23,10 @@ data "azuread_group" "aad_group" {
   display_name     = each.value
 }
 
-## Create project group on team project
-resource "azuredevops_group" "group" {
-  scope        = data.azuredevops_project.project.id
-  display_name = var.group_name
-  description  = var.group_description
+## Get group info from AzDo
+data "azuredevops_group" "azdo_group" {
+  project_id = data.azuredevops_project.project.id
+  name       = var.azdo_group_name
 }
 
 ## Link the aad group to an azdo group
@@ -38,6 +37,6 @@ resource "azuredevops_group" "azdo_group_linked_to_aad" {
 
 ## Add membership
 resource "azuredevops_group_membership" "membership" {
-  group = azuredevops_group.group.descriptor
+  group = data.azuredevops_group.azdo_group.descriptor
   members = flatten(values(azuredevops_group.azdo_group_linked_to_aad)[*].descriptor)
 }

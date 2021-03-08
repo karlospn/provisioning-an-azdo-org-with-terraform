@@ -24,21 +24,21 @@ provider "azuread" {
 }
 
 ## Add entitlements to all users from the AAD it-sales-team
-module "add-entitlement-to-group-users" {
+module "add-entitlement-to-sales-team-group-users" {
     source      = "../modules/add-entitlement-to-group-users"
     aad_users_groups = ["it-sales-team"]
     license_type = "basic"
 }
 
 ## Add entitlements to all users from the AAD it-commercial-team
-module "add-entitlement-to-group-users" {
+module "add-entitlement-to-commercial-team-group-users" {
     source      = "../modules/add-entitlement-to-group-users"
     aad_users_groups = ["it-commercial-team"]
     license_type = "basic"
 }
 
 ## Add entitlements to all users from the AAD it-managers-team
-module "add-entitlement-to-group-users" {
+module "add-entitlement-to-managers-team-group-users" {
     source      = "../modules/add-entitlement-to-group-users"
     aad_users_groups = ["it-managers-team"]
     license_type = "stakeholder"

@@ -13,7 +13,7 @@ provider "azuredevops"{
 }
 
 ## Create team project for the commercial team
-resource "azuredevops_project" "project" {
+resource "azuredevops_project" "project-comm" {
   name       = "Commercial Team Project"
   description        = "Repository used by the Commercial IT Team"
   visibility         = "private"
@@ -24,13 +24,12 @@ resource "azuredevops_project" "project" {
       "boards" = "disabled"
       "repositories" = "enabled"
       "pipelines" = "enabled"
-      "testplan" = "disabled"
       "artifacts" = "enabled"
   }
 }
 
 ## Create team project for the sales team
-resource "azuredevops_project" "project" {
+resource "azuredevops_project" "project-sales" {
   name       = "Sales Team Project"
   description        = "Repository used by the Sales IT Team"
   visibility         = "private"
@@ -41,7 +40,6 @@ resource "azuredevops_project" "project" {
       "boards" = "disabled"
       "repositories" = "enabled"
       "pipelines" = "enabled"
-      "testplan" = "disabled"
       "artifacts" = "enabled"
   }
 }
