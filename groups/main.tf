@@ -42,12 +42,17 @@ module "create-group-and-add-users-for-sales-team" {
 ## Add project permissions to the sales group
 module "add-permissions-to-sales-group"{
     source      = "../modules/add-permissions-to-group"
+    personal_access_token = var.personal_access_token
     project_name = local.comm_prj_name
     group_id = module.create-group-and-add-users-for-sales-team.group_id
+    group_descriptor = module.create-group-and-add-users-for-sales-team.group_descriptor
     project_permissions = {
         GENERIC_READ        = "Allow"
         START_BUILD         = "Allow"
         VIEW_TEST_RESULTS   = "Allow"
+    }
+    pipelines_permissions = {
+
     }
 }
 
@@ -63,11 +68,16 @@ module "create-group-and-add-users-for-comm-team" {
 ## Add project permissions to the comm group
 module "add-permissions-to-comm-group"{
     source      = "../modules/add-permissions-to-group"
+    personal_access_token = var.personal_access_token
     project_name = local.comm_prj_name
     group_id = module.create-group-and-add-users-for-comm-team.group_id
+    group_descriptor = module.create-group-and-add-users-for-sales-team.group_descriptor
     project_permissions = {
         GENERIC_READ        = "Allow"
         START_BUILD         = "Allow"
         VIEW_TEST_RESULTS   = "Allow"
+    }
+    pipelines_permissions = {
+
     }
 }

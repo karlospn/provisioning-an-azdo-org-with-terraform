@@ -9,3 +9,15 @@ variable "group_id" {
 variable project_permissions {
     type = map(string)
 }
+
+variable pipelines_permissions {
+    type = map(string)
+}
+
+variable personal_access_token {
+    type = string
+}
+
+variable group_descriptor {
+    type = string
+}

@@ -7,6 +7,11 @@ terraform {
   }
 }
 
+## Transform the pipelines permissions map<string> into json
+locals {
+  pipelines_json = jsonencode(var.pipelines_permissions)
+}
+
 ## Get project info
 data "azuredevops_project" "project" {
   name = var.project_name
@@ -27,9 +32,8 @@ resource "azuredevops_project_permissions" "project-perm" {
 #  - Get descriptor
 #  - Decode descriptor
 #  - Add permissions using security api. Needs the decoded group descriptor and the permissions bitmask
-# And run it like this:
-# resource "null_resource" "pipeline permissions" {
-#   provisioner "local-exec" {
-#     command = "PowerShell -file ./set-pipelines-permissions.ps1 -pat ${var.personal_access_token}"   
-#   }
-# }
+resource "null_resource" "pipelines-perm" {
+  provisioner "local-exec" {
+    command = "pwsh -file ${path.module}\\set-pipelines-permissions.ps1 -personal_access_token ${var.personal_access_token} -pipelines_permissions ${local.pipelines_json} -group_descriptor ${var.group_descriptor}  -project_id ${data.azuredevops_project.project.id}"
+  }
+}
