@@ -6,7 +6,7 @@ This repository contains an example about how you could provision an Azure DevOp
 There are some prerequisites that we need to fulfill in order to ran this example.
 - Having an existing AzDo organization.
 - Having your AzDo organization connected to an AAD directory.
-  - That's needed because we're not going to create new users, we're going to use AAD groups to provision the AzDo default security groups.
+  - That's needed because we're not going to create new users, we're going to use AAD groups and enrolls the users on those groups into our AzDo organization.
 
 
 ## Terraform folder structure
