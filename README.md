@@ -2,7 +2,7 @@
 
 This repository contains and example about how you could provision an Azure DevOps Team organization the official terraform provider   
 
-##Prerequisites
+## Prerequisites
 There are some prerequisites that we need to fulfill in order to ran this example.
 - Having an existing AzDo organization.
 - Having your AzDo organization connected to an AAD directory.
