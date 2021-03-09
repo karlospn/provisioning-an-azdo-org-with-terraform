@@ -1,6 +1,6 @@
 # Provisioning an Azure DevOps organization using Terraform
 
-This repository contains and example about how you could provision an Azure DevOps Team organization the official terraform provider   
+This repository contains an example about how you could provision an Azure DevOps Team organization using the official terraform provider   
 
 ## Prerequisites
 There are some prerequisites that we need to fulfill in order to ran this example.
