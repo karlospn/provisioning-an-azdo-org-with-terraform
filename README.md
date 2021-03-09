@@ -21,6 +21,91 @@ The repository is divided by:
   - It uses a module **create-repository-and-branch-policies** found in the **/modules** folder.
 
 
-## Terraform modules parameters:
+## Terraform modules 
 
+
+### _add-aad-users-to-azdo-group_ module
+
+### Parameters:
+
+| **Variables**    | **Type**     | **Description**                                                             |
+|------------------|--------------|-----------------------------------------------------------------------------|
+| project_name     | string       | Name of the AzDo Team project where the group is going to be added.         |
+| azdo_group_name  | string       | Which team project permissions group to use.  Ex: Contributors, Readers,... |
+| aad_users_groups | list(string) | List of AAD groups that are going to be added into the "azdo_group_name"    |
+
+### Usage:
+
+Given:
+- A Team Project
+- An AzDo Team Project permissions group (Readers, Contributors)
+- An AAD group
+
+It retrieves the group from the AAD an adds them into the given team project permissions group.
+
+###Example: 
+
+```yaml
+module "add-users-for-sales-team-to-azdo-group" {
+    source      = "../modules/add-aad-users-to-azdo-group"
+    project_name =  "Commercial Team Project"
+    azdo_group_name = "Contributors"
+    aad_users_groups = ["it-commercial-team"]
+}
+```
+
+### _add-entitlement-to-group-users_ module
+
+### Parameters:
+
+| **Variables**    | **Type**     | **Description**                                                             |
+|------------------|--------------|-----------------------------------------------------------------------------|
+| aad_users_groups | list(string) | List of AAD groups that are going to be enrolled into the AzDo organization.|
+| license_type     | string       | Which type of license is going to be assigned to the users.                 |
+
+### Usage:
+
+Given:
+- An AAD group
+- A license type
+
+It enrolls all the members of the AAD group into the AzDo organization and assigns them the given license type
+
+###Example: 
+
+```yaml
+module "add-entitlement-to-sales-team-group-users" {
+    source      = "../modules/add-entitlement-to-group-users"
+    aad_users_groups = ["it-sales-team"]
+    license_type = "basic"
+}
+```
+
+### _create-repository-and-branch-policies_ module
+
+### Parameters:
+
+| **Variables**    | **Type**     | **Description**                                                             |
+|------------------|--------------|-----------------------------------------------------------------------------|
+| project_name     | string       | Name of the AzDo Team project where the repository is going to be created.  |
+| repository_name  | string       | Name of the repository.                                                     |
+
+### Usage:
+
+Given:
+- A Team project
+- A Git Repository
+
+It creates the Git Repository into the given Team Project.   
+It also creates the master branch policies. Those branch policies cannot be configured.
+
+###Example: 
+
+```yaml
+module "create-repository-and-policies-for-commercial-team-api" {
+    source      = "../modules/create-repository-and-branch-policies"
+    project_name = "Commercial Team Project"
+    repository_name = "comm-web-api"
+}
+```
 
