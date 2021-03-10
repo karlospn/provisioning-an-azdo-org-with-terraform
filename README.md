@@ -43,7 +43,7 @@ Given:
 
 It retrieves the group from the AAD an adds them into the given team project permissions group.
 
-###Example: 
+### Example: 
 
 ```yaml
 module "add-users-for-sales-team-to-azdo-group" {
@@ -71,7 +71,7 @@ Given:
 
 It enrolls all the members of the AAD group into the AzDo organization and assigns them the given license type
 
-###Example: 
+### Example: 
 
 ```yaml
 module "add-entitlement-to-sales-team-group-users" {
@@ -99,7 +99,7 @@ Given:
 It creates the Git Repository into the given Team Project.   
 It also creates the master branch policies. Those branch policies cannot be configured.
 
-###Example: 
+### Example: 
 
 ```yaml
 module "create-repository-and-policies-for-commercial-team-api" {
