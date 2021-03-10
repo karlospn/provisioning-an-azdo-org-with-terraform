@@ -41,7 +41,8 @@ Given:
 - An AzDo Team Project permissions group (Readers, Contributors)
 - An AAD group
 
-It retrieves the group from the AAD an adds them into the given team project permissions group.
+It retrieves the group from the AAD an adds them into a specific team project permissions group.
+Right now it only works with the default project permissions groups, you cannot assign them into a custom permissions group.
 
 ### Example: 
 
