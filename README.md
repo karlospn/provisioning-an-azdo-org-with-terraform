@@ -69,7 +69,7 @@ Given:
 - An AAD group
 - A license type
 
-It enrolls all the members of the AAD group into the AzDo organization and assigns them the given license type
+It enrolls all the members of the AAD group into the AzDo organization and assigns them a license from the specified type
 
 ### Example: 
 
@@ -96,8 +96,8 @@ Given:
 - A Team project
 - A Git Repository
 
-It creates the Git Repository into the given Team Project.   
-It also creates the master branch policies. Those branch policies cannot be configured.
+It creates the Git Repository in the given Team Project.   
+It also creates the master branch policies. Those branch policies cannot be configured via module variables for now.
 
 ### Example: 
 
