@@ -24,14 +24,14 @@ locals {
 }
 
 ## Create repository for commercial team apps
-## Create repository for commercial team api
+## Create repository for commercial team webapi app
 module "create-repository-and-policies-for-commercial-team-api" {
     source      = "../modules/create-repository-and-branch-policies"
     project_name = local.comm_prj_name
     repository_name = "comm-api"
 }
 
-## Create repository for commercial team ui
+## Create repository for commercial team ui app
 module "create-repository-and-policies-for-commercial-team-ui" {
     source      = "../modules/create-repository-and-branch-policies"
     project_name = local.comm_prj_name
@@ -39,7 +39,7 @@ module "create-repository-and-policies-for-commercial-team-ui" {
 }
 
 ## Create repository for sales team apps
-## Create repository for sales team ui
+## Create repository for sales team webapi app
 module "create-repository-and-policies-for-sales-team-api" {
     source      = "../modules/create-repository-and-branch-policies"
     project_name = local.sales_prj_name
