@@ -15,8 +15,8 @@ The repository is divided by:
 - **/project** folder : Provision the team project for the different teams.
 - **/entitlements** folder: Enrolls the AAD users from a given AAD group into the AzDO organization giving them an AzDo license.
   - It uses the module **add-entitlement-to-group-users** found in the **/modules** folder.
-- **/groups** folder: Reads the given groups from AAD and adds them into the given security group of a given team project.
-  - It uses the module **add-aad-users-to-azdo-group** found in the **/modules** folder.
+- **/groups-permissions** folder: Reads the given groups from AAD and adds them into the given security group of a given team project.
+  - It uses the module **add-aad-groups-to-azdo-team-project-sec-group** found in the **/modules** folder.
 - **/repository** folder: Creates the repositories for the given apps and also creates the master branch policies
   - It uses the module **create-repository-and-branch-policies** found in the **/modules** folder.
 
@@ -24,7 +24,7 @@ The repository is divided by:
 ## Terraform modules 
 
 
-### _add-aad-users-to-azdo-group_ module
+### _add-aad-groups-to-azdo-team-project-sec-group_ module
 
 ### Parameters:
 
