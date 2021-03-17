@@ -12,17 +12,44 @@ There are some prerequisites that we need to fulfill in order to ran this exampl
 ## Terraform folder structure
 
 The repository is divided by:
-- **/project** folder : Provision the team project for the different teams.
-- **/entitlements** folder: Enrolls the AAD users from a given AAD group into the AzDO organization giving them an AzDo license.
+- **/project** folder : Creates the team projects for every team.
+- **/entitlements** folder: Enrolls the AAD users from a given AAD group and assign them a license.
   - It uses the module **add-entitlement-to-group-users** found in the **/modules** folder.
 - **/groups-permissions** folder: Reads the given groups from AAD and adds them into the given security group of a given team project.
   - It uses the module **add-aad-groups-to-azdo-team-project-sec-group** found in the **/modules** folder.
-- **/repository** folder: Creates the repositories for the given apps and also creates the master branch policies
+- **/repository** folder: Creates the git repositories for the apps and set a few master branch policies
   - It uses the module **create-repository-and-branch-policies** found in the **/modules** folder.
 
 
 ## Terraform modules 
 
+
+### _add-entitlement-to-group-users_ module
+
+### Parameters:
+
+| **Variables**    | **Type**     | **Description**                                                             |
+|------------------|--------------|-----------------------------------------------------------------------------|
+| aad_users_groups | list(string) | List of AAD groups that are going to be enrolled into the AzDo organization.|
+| license_type     | string       | Which type of license is going to be assigned to the users.                 |
+
+### Usage:
+
+Given:
+- An AAD group
+- A license type
+
+It enrolls all the members of the AAD group into the AzDo organization and assigns them a license from the specified type
+
+### Example: 
+
+```yaml
+module "add-entitlement-to-sales-team-group-users" {
+    source      = "../modules/add-entitlement-to-group-users"
+    aad_users_groups = ["it-sales-team"]
+    license_type = "basic"
+}
+```
 
 ### _add-aad-groups-to-azdo-team-project-sec-group_ module
 
@@ -52,33 +79,6 @@ module "add-users-for-sales-team-to-azdo-group" {
     project_name =  "Commercial Team Project"
     azdo_group_name = "Contributors"
     aad_users_groups = ["it-commercial-team"]
-}
-```
-
-### _add-entitlement-to-group-users_ module
-
-### Parameters:
-
-| **Variables**    | **Type**     | **Description**                                                             |
-|------------------|--------------|-----------------------------------------------------------------------------|
-| aad_users_groups | list(string) | List of AAD groups that are going to be enrolled into the AzDo organization.|
-| license_type     | string       | Which type of license is going to be assigned to the users.                 |
-
-### Usage:
-
-Given:
-- An AAD group
-- A license type
-
-It enrolls all the members of the AAD group into the AzDo organization and assigns them a license from the specified type
-
-### Example: 
-
-```yaml
-module "add-entitlement-to-sales-team-group-users" {
-    source      = "../modules/add-entitlement-to-group-users"
-    aad_users_groups = ["it-sales-team"]
-    license_type = "basic"
 }
 ```
 
